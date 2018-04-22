@@ -33,6 +33,6 @@ settings:
 	CW Mode:				      Standard / auto
 ```
 
-Note: the comtainers uses a folder to store persisent data:
+Note: the containers uses a folder to store persisent data:
 >/docker/data/tvheadend
 
