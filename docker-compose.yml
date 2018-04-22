@@ -1,0 +1,36 @@
+version: '3'
+services:
+   tvheadend:
+      build: ./tvheadend
+      container_name: tvheadend
+      image: tgiesela/tvheadend:v0.4
+      hostname: tvheadend
+      domainname: thuis.local
+      ports:
+         - "9981:9981"   # web
+         - "9982:9982"   # smtp-auth
+      volumes:
+        - /docker/data/tvheadend:/config
+      network_mode: "host"
+      depends_on: 
+        - "oscam"
+
+   oscam:
+      build: ./oscam
+      container_name: oscam
+      image: tgiesela/oscam
+      hostname: oscam
+      domainname: thuis.local
+      ports:
+         - "9000:9000"   # oscam dvb
+         - "8888:8888"   # web gui
+      privileged: true
+      volumes:
+        - /dev/bus/usb:/dev/bus/usb
+      network_mode: "host"
+
+
+#volumes:
+#  maildata:/dockerdata/mail
+#    driver: local
+

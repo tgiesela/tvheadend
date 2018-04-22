@@ -1,0 +1,13 @@
+# oscam.user generated automatically by Streamboard OSCAM 1.20-unstable_svn SVN r0
+# Read more: http://www.streamboard.tv/svn/oscam/trunk/Distribution/doc/txt/oscam.user.txt
+
+[account]
+user                          = admin
+pwd                           = admin
+#caid                          = 0100
+monlevel                      = 0
+group                         = 1,2
+au			      = 1
+services                      = services1,services2
+ident                         = 0100:000000,FFFFFF
+

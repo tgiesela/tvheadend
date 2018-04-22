@@ -1,0 +1,9 @@
+# Astra 19.2E SDT info service transponder
+# freq pol sr fec
+[CHANNEL]
+        DELIVERY_SYSTEM = DVBS2
+        FREQUENCY = 11347000
+        POLARIZATION = VERTICAL
+        SYMBOL_RATE = 22000000
+        INNER_FEC = 2/3
+        INVERSION = AUTO

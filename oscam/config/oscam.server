@@ -1,0 +1,11 @@
+# oscam.server generated automatically by Streamboard OSCAM 1.20-unstable_svn SVN r0
+# Read more: http://www.streamboard.tv/svn/oscam/trunk/Distribution/doc/txt/oscam.server.txt
+
+[reader]
+label                         = CanalDigitaal
+protocol                      = pcsc
+device                        = 0
+caid                          = 0100
+detect                        = cd
+group                         = 1
+
