@@ -27,7 +27,6 @@ RUN apt-get update \
     libavutil-dev \
     libssl-dev \
     libswscale-dev \
-    libpcre3-dev \
     nano \
     net-tools \
     openssh-server \
@@ -38,14 +37,11 @@ RUN apt-get update \
 
 RUN apt-get update && apt-get install -y cmake libdvbcsa-dev
 WORKDIR /home
-
 RUN git clone https://github.com/tvheadend/tvheadend.git \
  && cd tvheadend \
- && ./configure "--disable-libvpx --disable-bintray_cache" \
+ && ./configure \
  && make \
  && make install
-
-# For x86_64 processor remove the disabled opts from './configure' above
 
 # Install xmltv & tvheadend 
 RUN apt-get update \

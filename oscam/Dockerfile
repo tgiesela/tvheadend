@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM resin/rpi-raspbian:latest
 MAINTAINER Tonny Gieselaar<tgiesela@hccnet.nl>
 
 ENV _aptclean="apt-get clean && rm -rf /var/lib/apt/lists/*"
@@ -44,7 +44,10 @@ RUN git clone https://github.com/gfto/oscam /tmp/oscam-git \
  && cd Distribution \
  && mkdir /var/bin \
  && mkdir /var/log/oscam \
- && cp oscam-1.20-unstable_svn0-x86_64-linux-gnu-pcsc /var/bin/oscam
+ && cp oscam-1.20-unstable_svn0-arm-linux-gnueabihf-pcsc /var/bin/oscam
+
+# for x86-64 processor, change last line to:
+#&& cp oscam-1.20-unstable_svn0-x86_64-linux-gnu-pcsc /var/bin/oscam
 
 # configs
 ADD config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
