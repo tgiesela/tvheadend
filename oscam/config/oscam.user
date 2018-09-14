@@ -2,12 +2,17 @@
 # Read more: http://www.streamboard.tv/svn/oscam/trunk/Distribution/doc/txt/oscam.user.txt
 
 [account]
-user                          = admin
-pwd                           = admin
+user                          = tvheadend
+pwd                           = 
+au                            = 1
+group                         = 1
+#ident                         = 0100:000000,FFFFFF
 #caid                          = 0100
-monlevel                      = 0
-group                         = 1,2
-au			      = 1
-services                      = services1,services2
+
+[account]
+user                          = anonymous
+pwd                           =
+au                            = 1
+group                         = 1
 ident                         = 0100:000000,FFFFFF
 
