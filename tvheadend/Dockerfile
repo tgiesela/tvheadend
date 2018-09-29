@@ -1,10 +1,8 @@
 FROM resin/rpi-raspbian:latest
 MAINTAINER Tonny Gieselaar<tgiesela@hccnet.nl>
 
-ENV tvh_release=stable
 ENV _aptclean="apt-get clean && rm -rf /var/lib/apt/lists/*"
-ENV _repocomponent="stable-4.2"
-ENV _distro="xenial"
+ENV _repocomponent="release/4.2"
 
 # Setup ssh and install supervisord
 RUN apt-get update \
@@ -39,9 +37,13 @@ RUN apt-get update \
 RUN apt-get update && apt-get install -y cmake libdvbcsa-dev
 WORKDIR /home
 
+RUN apt-get -y install libvpx-dev
 RUN git clone https://github.com/tvheadend/tvheadend.git \
- && cd tvheadend \
- && ./configure "--disable-libvpx --disable-bintray_cache" \
+ && cd tvheadend 
+# && git checkout $_repocomponent \
+#RUN ./configure "--disable-libvpx --disable-bintray_cache" \
+RUN cd /home/tvheadend \
+ && ./configure "--disable-ffmpeg_static --enable-ccdebug" \
  && make \
  && make install
 
