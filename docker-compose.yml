@@ -3,15 +3,17 @@ services:
    tvheadend:
       build: ./tvheadend
       container_name: tvheadend
-      image: tgiesela/tvheadend:v0.4
+      image: tgiesela/tvheadend:v0.5
       hostname: tvheadend
       domainname: thuis.local
       ports:
          - "9981:9981"   # web
          - "9982:9982"   # smtp-auth
+      privileged: true
       volumes:
         - /docker/data/tvheadend:/config
         - /mnt/recordings:/recordings
+        - /dev/bus/usb:/dev/bus/usb
       network_mode: "host"
       depends_on: 
         - "oscam"
