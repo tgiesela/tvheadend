@@ -1,4 +1,5 @@
-FROM resin/rpi-raspbian:latest
+#FROM resin/rpi-raspbian:latest
+FROM debian:latest
 MAINTAINER Tonny Gieselaar<tgiesela@hccnet.nl>
 
 ENV _aptclean="apt-get clean && rm -rf /var/lib/apt/lists/*"
@@ -29,6 +30,7 @@ RUN apt-get update \
     nano \
     net-tools \
     openssh-server \
+    python \
     supervisor \
     wget \
     zlib1g-dev \

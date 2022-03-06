@@ -1,3 +1,4 @@
+#FROM resin/rpi-raspbian:latest
 FROM debian:latest
 MAINTAINER Tonny Gieselaar<tgiesela@hccnet.nl>
 
@@ -42,11 +43,10 @@ RUN git clone https://github.com/gfto/oscam /tmp/oscam-git
 RUN cd /tmp/oscam-git && sed -i '/#include <sys\/utsname.h>/a #include <sys\/sysmacros.h>' globals.h
 RUN cd /tmp/oscam-git && make pcsc
 RUN mkdir /var/bin mkdir /var/log/oscam 
-RUN cd /tmp/oscam-git/Distribution && ls 
-RUN cd /tmp/oscam-git/Distribution && cp oscam-1.20-unstable_svn0-arm-linux-gnueabihf-pcsc /var/bin/oscam
+#RUN cp /tmp/oscam-git/Distribution/oscam-1.20-unstable_svn0-arm-linux-gnueabihf-pcsc /var/bin/oscam
 
 # for x86-64 processor, change last line to:
-#&& cp oscam-1.20-unstable_svn0-x86_64-linux-gnu-pcsc /var/bin/oscam
+RUN cp /tmp/oscam-git/Distribution/oscam-1.20-unstable_svn0-x86_64-linux-gnu-pcsc /var/bin/oscam
 
 # configs
 ADD config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
