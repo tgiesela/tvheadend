@@ -1,0 +1,17 @@
+# oscam.server generated automatically by Streamboard OSCAM 1.20-unstable_svn SVN r0
+# Read more: http://www.streamboard.tv/svn/oscam/trunk/Distribution/doc/txt/oscam.server.txt
+
+[reader]
+label                         = Ziggo
+protocol                      = pcsc
+device                        = 0
+ecmwhitelist                  = 0604:44,4C
+caid                          = 0604:000000
+ident                         = 0604:000000
+detect                        = cd
+group                         = 1
+emmcache                      = 1,3,2
+auprovid                      = 0B6E81
+boxkey			      = 1122334455667788
+rsakey			      = 3C8633AAC0D367533DEC7BB2EEEDEB8CA3ADA52E58B99BB34672783277A1DAAC3B6106AD0909774E031B2A6E30195B437683AD0FC599B87D08CEA47BE1B6C76A
+
