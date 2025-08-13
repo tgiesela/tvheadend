@@ -1,7 +1,15 @@
-version: '2'
+x-logging:
+    &default-logging
+    driver: "json-file"
+    options:
+        max-size: "10m"
+        max-file: "3"
+
 services:
    tvheadend:
-      build: ./tvheadend
+      build: 
+        context: ./tvheadend
+        target: tvheadendruntime
       container_name: tvheadend
       image: tgiesela/tvheadend:v0.5
       hostname: tvheadend
@@ -20,11 +28,14 @@ services:
       environment:
         - TZ=Europe/Amsterdam
       restart: always
+      logging: *default-logging
 
    oscam:
-      build: ./oscam
+      build: 
+        context: ./oscam
+        target: oscamruntime
       container_name: oscam
-      image: tgiesela/oscam
+      image: tgiesela/oscam:v0.1
       hostname: oscam
       domainname: thuis.local
 #      ports:
@@ -37,8 +48,6 @@ services:
       environment:
         - TZ=Europe/Amsterdam
       restart: always
+      logging: *default-logging
 
-#volumes:
-#  maildata:/dockerdata/mail
-#    driver: local
 
