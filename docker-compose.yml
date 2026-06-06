@@ -14,19 +14,22 @@ services:
       image: tgiesela/tvheadend:v0.5
       hostname: tvheadend
       domainname: thuis.local
-#      ports:
-#         - "9981:9981"   # web
-#         - "9982:9982"   # smtp-auth
+      ports:
+         - "9981:9981/tcp"   # web
+         - "9982:9982/tcp"   # smtp-auth
+         - "9981:9981/udp"   # web
+         - "9982:9982/udp"   # smtp-auth
       privileged: true
       volumes:
-        - /docker/data/tvheadend:/config
-        - /mnt/recordings:/recordings
+        - ${TVHEADEND_CONFIG:-/docer/data/tvheadend}:/config
+        - ${RECORDINGS:-/mnt/recordings}:/recordings
         - /dev/bus/usb:/dev/bus/usb
-      network_mode: "host"
+        - /dev/dvb:/dev/dvb
+#      network_mode: "host"
       depends_on: 
         - "oscam"
       environment:
-        - TZ=Europe/Amsterdam
+        - TZ=${TZ}
       restart: always
       logging: *default-logging
 
@@ -38,15 +41,15 @@ services:
       image: tgiesela/oscam:v0.1
       hostname: oscam
       domainname: thuis.local
-#      ports:
-#         - "9000:9000"   # oscam dvb
-#         - "8888:8888"   # web gui
-      privileged: true
+      ports:
+         - "9000:9000"   # oscam dvb
+         - "8888:8888"   # web gui
+#      privileged: true
       volumes:
         - /dev/bus/usb:/dev/bus/usb
-      network_mode: "host"
+#      network_mode: "host"
       environment:
-        - TZ=Europe/Amsterdam
+        - TZ=${TZ}
       restart: always
       logging: *default-logging
 

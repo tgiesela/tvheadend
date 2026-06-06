@@ -5,8 +5,11 @@ RUN apt-get update \
  && apt-get upgrade -y \
  && apt-get install -y --no-install-recommends \
         libdvbcsa1 \
+	libavahi-common3 \
+	libavahi-client3 \
         libssl3 \
         iproute2 \
+        liburiparser1 \
  && eval $_aptclean 
 
 FROM tvheadendbase AS tvheadendbuilder
@@ -14,6 +17,12 @@ FROM tvheadendbase AS tvheadendbuilder
 RUN apt-get update \
  && apt-get upgrade -y \
  && apt-get install -y \
+        debhelper \
+        libavahi-client-dev \
+        zlib1g-dev \
+        liburiparser-dev \
+        python3-requests \
+        libpcre2-dev \
         apt-utils \
         pkg-config \
         git \
@@ -30,14 +39,16 @@ RUN apt-get update \
 WORKDIR /git
 RUN git clone https://github.com/tvheadend/tvheadend.git \
  && cd tvheadend \
- && ./configure \
- && make \
- && make install
+ && AUTOBUILD_CONFIGURE_EXTRA="--enable-libffmpeg_static --enable-trace --enable-debug" ./Autobuild.sh \
+ && make 
+
+RUN cd tvheadend && make install
 
 FROM tvheadendbase AS tvheadendruntime
 
-COPY --from=tvheadendbuilder /usr/local/bin/ /usr/local/bin/
-COPY --from=tvheadendbuilder /usr/local/share/tvheadend/ /usr/local/share/tvheadend/
+COPY --from=tvheadendbuilder /usr/bin/ /usr/bin/
+COPY --from=tvheadendbuilder /usr/share/tvheadend/ /usr/share/tvheadend/
 
 EXPOSE 9981 9982
-CMD ["tvheadend", "-C", "-u", "hts", "-g", "video", "-c", "/config","--satip_bindaddr","10.56.57.145"]
+#CMD ["tvheadend", "-C", "-u", "hts", "-g", "video", "-c", "/config","--satip_bindaddr","10.56.57.145"]
+CMD ["tvheadend", "-C", "-c", "/config"]

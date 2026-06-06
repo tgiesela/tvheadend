@@ -10,9 +10,9 @@ RUN apt-get update \
 
 #Relocate timezone file and create folders
 RUN mkdir -p /config/.etc \
- && mkdir -p /var/run/sshd \
- && mv /etc/timezone /config/.etc/ \
- && ln -s /config/.etc/timezone /etc/
+ && mkdir -p /var/run/sshd 
+# && mv /etc/timezone /config/.etc/ \
+# && # ln -s /config/.etc/timezone /etc/
 
 #=============================================================================
 FROM oscambase AS oscambuilder
