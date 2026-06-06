@@ -1,4 +1,7 @@
 # tvheadend with oscam
+> [!Warning]
+> Archived and moved to codeberg.org
+
 Tvheadend with Oscam for SAT>IP server
 Tvheadend and Oscam are running in separate containers. Oscam is configured
 to use an USB card reader like OMNIKEY. 
