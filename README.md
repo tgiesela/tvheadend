@@ -35,4 +35,5 @@ settings:
 
 Note: the containers uses a folder to store persisent data:
 >/docker/data/tvheadend
+
 Make sure this folder is accessible in the docker container by using chmod. Otherwise you will see permission denied during startup.
